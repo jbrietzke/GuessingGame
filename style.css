@@ -59,3 +59,14 @@ input[type="submit"] {
 .navigation {
     text-align: center;
 }
+
+#result {
+    text-align: center;
+}
+
+#gameOver {
+    background-color: red;
+    font-size: 80px;
+    font-weight: bold;
+    text-align: center;
+}

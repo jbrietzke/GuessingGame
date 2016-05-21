@@ -11,15 +11,18 @@
 	</div>
 	<div class="content">
 		<h1>Guess the number</h1>
-		<form>
+		<form onsubmit="return false">
 			<p>Input a number 1-100</p>
-			<input type="text" name="userGuess"></input>
-			<input type="submit" name="submitInput" value="Submit"></input>
+			<input type="text" name="userGuess" id="userGuess"></input>
+			<input type="button" name="submitInput" value="Submit" id="submitGuess"></input>
 		</form>
 	</div>
 	<div class="navigation">
-		<button type="button" class="playAgain">Play Again</button>
-		<button type="button" class="needHint">Need a hint?</button>
+		<button type="reset" class="playAgain" id="reset" >Play Again</button>
+		<button type="button" class="needHint" id="hintButton">Need a hint?</button>
 	</div>
+
+	<script type="text/javascript" src="jquery-1.12.3.js"></script>
+	<script type="text/javascript" src="guessingGame.js"></script>
 </body>
 </html>
