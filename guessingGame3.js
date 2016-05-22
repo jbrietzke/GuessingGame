@@ -1,7 +1,8 @@
-//* **** Global Variables **** */
+/* **** Global Variables **** */
 // try to elminate these global variables in your project, these are here just to start.
-
-/*var winningNumber = generateWinningNumber();
+(function(){
+var playersGuess;
+var winningNumber = generateWinningNumber();
 var previousGuesses = [];
 var numberOfGuessesAllowed = 5;
 
@@ -41,33 +42,30 @@ function lowerOrHigher(guessNumber, actualNumber){
 
 // Check if the Player's Guess is the winning number 
 
-function checkGuess(previousGuesses){
+function checkGuess(){
 	// add code here
 	var response = "";
-	if(previousGuesses !== []){
-		for(var i=0; i < previousGuesses.length; i++){
-			if (playersGuess === previousGuesses[i]) {
-				response = $('<p id= "result" >That is a duplicate number! <\p>');
-			}
+	for(var i=0; i < previousGuesses.length; i++){
+		if (playersGuess === previousGuesses[i]) {
+			response = $('<p id= "result" >That is a duplicate number! <\p>');
 		}
-	}else{
-		if (response === ""){
-			previousGuesses.push(playersGuess);
-			var remainingGuesses = 5 - previousGuesses.length;
-			if (playersGuess === winningNumber) {
-				$('body').css({"background-image": "url(Victory-Baby-Meme-04.jpg)"});
-				$('.content, h1, p').hide();
+	}
+	if (response === ""){
+		previousGuesses.push(playersGuess);
+		var remainingGuesses = 5 - previousGuesses.length;
+		if (playersGuess === winningNumber) {
+			$('body').css({"background-image": "url(Victory-Baby-Meme-04.jpg)"});
+			$('.content, h1, p').hide();
+			$('.navigation').prepend(response);
+		}else{
+			if (previousGuesses.length === numberOfGuessesAllowed) {
+				$('body').css({"background-color": "black"});
+				response = $('<p id="gameOver"> Game Over <\p>');
 				$('.navigation').prepend(response);
 			}else{
-				if (previousGuesses.length === numberOfGuessesAllowed) {
-					$('body').css({"background-color": "black"});
-					response = $('<p id="gameOver"> Game Over <\p>');
-					$('.navigation').prepend(response);
-				}else{
-					var guessDifference = lowerOrHigher(playersGuess, winningNumber);
-					var message = guessMessage(guessDifference);
-					response = $('<p id="result"> Try Again! '+ message + ' You have '+ remainingGuesses +' guesses remaing. <\p>');
-				}
+				var guessDifference = lowerOrHigher(playersGuess, winningNumber);
+				var message = guessMessage(guessDifference);
+				response = $('<p id="result"> Try Again! '+ message + ' You have '+ remainingGuesses +' guesses remaing. <\p>');
 			}
 		}
 	}
@@ -140,15 +138,9 @@ function playAgain(){
 
 
 /* **** Event Listeners/Handlers ****  */
-(function(){
-var winningNumber = generateWinningNumber();
-var previousGuesses = [];
-var numberOfGuessesAllowed = 5;
-
-$('#submitGuess').click(function(previousGuesses){
-	var playersGuess;
+$('#submitGuess').click(function(){
 	playersGuessSubmission();
-	checkGuess(previousGuesses);
+	checkGuess();
 })
 
 $('#hintButton').click(function(){
@@ -166,5 +158,7 @@ $(document).keypress(function(event){
 	}
 })
 
-}());
+})();
+
+
 
